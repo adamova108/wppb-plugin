@@ -8,14 +8,12 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://github.com/adamova108
  * @since             1.0.0
  * @package           Al_Author
  *
  * @wordpress-plugin
  * Plugin Name:       AL Author
- * Plugin URI:        https://sandbox.stagedev.hu/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This is a demo plugin.
  * Version:           1.0.0
  * Author:            Adam Luzsi
  * Author URI:        https://github.com/adamova108

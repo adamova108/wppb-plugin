@@ -78,6 +78,7 @@ class Al_Author {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_common_hooks();
 
 	}
 
@@ -122,6 +123,11 @@ class Al_Author {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-al-author-public.php';
 
+		/**
+		 * The class responsible for defining all actions that commonly occur.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-al-author-common.php';
+
 		$this->loader = new Al_Author_Loader();
 
 	}
@@ -156,7 +162,7 @@ class Al_Author {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		
 	}
 
 	/**
@@ -172,6 +178,20 @@ class Al_Author {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the common hooks related to the plugin
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_common_hooks() {
+
+		$plugin_admin = new Al_Author_Common( $this->get_plugin_name(), $this->get_version() );
+	
+		$this->loader->add_action( 'init', $plugin_admin, 'register_authors_cpt' );
 
 	}
 

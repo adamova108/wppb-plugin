@@ -61,22 +61,16 @@ class Al_Author_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Al_Author_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Al_Author_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		global $current_screen;
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-admin.css', array(), $this->version, 'all' );
 
+		//Add the Select2 CSS file - IF - we are editing an Author CPT post
+		if ($current_screen->id == 'edit-authors') {
+			wp_enqueue_style( 'select2-css', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0-rc.0');
+		}
 	}
-
+	
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
@@ -84,20 +78,15 @@ class Al_Author_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Al_Author_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Al_Author_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
+		global $current_screen;
+		
+		//Add the Select2 JavaScript file - IF - we are editing an Author CPT post
+		if ($current_screen->id == 'edit-authors') {
+			wp_enqueue_script( 'select2-js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', 'jquery', '4.1.0-rc.0');
+		}
+		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-admin.js', array( 'jquery' ), $this->version, false );
-
+		
 	}
-
+	
 }
