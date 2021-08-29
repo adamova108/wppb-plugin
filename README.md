@@ -1,2 +1,1 @@
-# wppb-plugin
-WP demo plugin
+# A WordPress demo plugin from a WPPB boilerplate template
