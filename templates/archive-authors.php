@@ -7,17 +7,21 @@
 <ul id="al_authors_archive_list">
 
 <?php 
-while ( have_posts() ) : the_post();
+while ( have_posts() ) : 
+    
+    the_post(); 
+    al_the_author_data();
     
     echo '<li>';
 
-    global $author_data;
-    $author_data = al_get_authordata();
-    
     al_the_author_image(); 
-    echo '<h2><a href="'.get_permalink().'">'.get_the_title().'</a></h2>';
+    al_the_author_title();
+    al_the_author_bio_excerpt();
+    al_the_author_social();
+    al_the_author_profile_link();
     
     echo '</li>';
+
 endwhile; // End of the loop. ?>
 
 </ul>

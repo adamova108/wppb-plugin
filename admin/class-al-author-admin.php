@@ -54,7 +54,7 @@ class Al_Author_Admin {
 
 		//Add the Select2 CSS file - IF - we are editing an Author CPT post
 		if ($current_screen->id == 'edit-authors') {
-			wp_enqueue_style( 'select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
+			wp_enqueue_style( 'select2-css', plugin_dir_url( __FILE__ ) . 'css/select2.min.css', array(), '4.0.13');
 		}
 	}
 	
@@ -69,12 +69,14 @@ class Al_Author_Admin {
 		
 		// Add the Select2 JavaScript file - IF - we are editing an Author CPT post
 		if ($current_screen->id == 'edit-authors') {
-			wp_enqueue_script( 'select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', 'jquery', '4.0.13');
+			wp_enqueue_script( 'select2-js', plugin_dir_url( __FILE__ ) . 'js/select2.min.js', 'jquery', '4.0.13');
 		}
 		
 		// Enqueue the general admin JS | instead of the plugin version I use microtime() to prevent browser caching
 		wp_enqueue_script( $this->plugin_name.'-nowrapper', plugin_dir_url( __FILE__ ) . 'js/al-author-admin-nowrapper.js', array( 'jquery' ), microtime(), false );
+		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-admin.js', array( 'jquery' ), microtime(), false );
+		
 		wp_enqueue_media();
 
 		wp_enqueue_script('jquery-ui-core');
@@ -131,7 +133,7 @@ class Al_Author_Admin {
 		$al_author_custom = $wpdb->get_results("SELECT meta_key, meta_value FROM $wpdb->postmeta WHERE post_id = $post_id AND meta_key LIKE 'al_author_%'");
 	
 		$author_data = [];
-		
+
 		if ($al_author_custom) {
 			foreach($al_author_custom as $aC) {
 				$author_data[$aC->meta_key] = maybe_unserialize($aC->meta_value);
@@ -321,10 +323,58 @@ class Al_Author_Admin {
 	}
 
 
-	public function al_author_profile_pic_add_ajax_callback() {
-
-		global $wpdb;
+	 public function author_admin_columns($columns) {
+		
+		$columns['profile_pic'] = __( 'Profile Picture', $this->plugin_name );
+		$columns['first_name'] = __( 'First Name', $this->plugin_name );
+		$columns['last_name'] = __( 'Last Name', $this->plugin_name );
+  		return $columns;
 
 	}
+	
+
+	function author_admin_sortable_columns( $columns ) {
+		$columns['first_name'] = 'first_name';
+		$columns['last_name'] = 'last_name';
+		return $columns;
+	}
+	
+
+
+	public function author_admin_columns_switch( $column, $post_id ) {
+		
+		switch( $column ) {
+
+			case 'profile_pic':
+				$profile_pic_id = get_post_meta($post_id, 'al_author_profile_pic', true);
+				if (is_numeric($profile_pic_id)) {
+					$image_URL = wp_get_attachment_image_src( $profile_pic_id, 'thumbnail' );
+					$image_URL = array_shift( $image_URL );
+					echo "<img width='80' src='$image_URL' />";
+				}
+				else {
+					echo '<em>No image.</em>';
+				}
+				
+				break;
+
+			case 'first_name':
+				echo get_post_meta($post_id, 'al_author_first_name', true);
+				break;
+			
+			case 'last_name':
+				echo get_post_meta($post_id, 'al_author_last_name', true);
+				break;
+		}
+	} 
+  
+
+
+	public function authors_archive_query_override($query) {
+        if ( is_post_type_archive('authors') ) {
+           $query->set( 'order', 'ASC' );
+           $query->set( 'orderby', 'title' );
+		}
+    }
 
 }

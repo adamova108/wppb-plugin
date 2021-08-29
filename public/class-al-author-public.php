@@ -44,6 +44,8 @@ class Al_Author_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-public.css', array(), microtime(), 'all' );
 
+		wp_enqueue_style( $this->plugin_name.'-fancybox', plugin_dir_url( __FILE__ ) . 'css/jquery.fancybox.min.css', array(), microtime(), 'all' );
+
 	}
 
 	/**
@@ -53,7 +55,9 @@ class Al_Author_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-public.js', array( 'jquery' ), microtime(), false );
+
+		wp_enqueue_script( $this->plugin_name.'-fancybox', plugin_dir_url( __FILE__ ) . 'js/jquery.fancybox.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 

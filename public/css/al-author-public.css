@@ -3,10 +3,14 @@
  * included in this file.
  */
 
+
+/* Authors Single */
+
  #al_authors_wrapper {
      max-width: 1280px;
      margin: 0 auto;
      padding: 1em 0;
+     overflow: hidden;
  }
 
  #al_authors_wrapper h1 {
@@ -20,6 +24,11 @@
     margin: 0 0 .5em;
     font-size: 2em;
     font-weight: bold;
+    border-bottom: 1px solid #dedede;
+ }
+
+ #al_authors_wrapper > h2 {
+    margin: 2em 0 1em;
  }
 
  #al_authors_wrapper p {
@@ -63,12 +72,85 @@
     padding: 0 0 0 2em;
 }
 
+.single-authors .al_author_social_link {
+    float: left;
+    margin-right: 1em;
+}
+
+.single-authors .al_author_social_link:first-of-type {
+    clear: both;
+}
+
+.single-authors .al_author_social_link span::before {
+    font-size: 30px;
+    border: 1px solid #2ea3f2;
+    width: auto;
+    height: auto;
+}
+
+
+/* Author Gallery */
+
+#al_author_gallery_wrapper {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 3vw;
+    grid-row-gap: 3vw;
+}
+
+#al_author_gallery_wrapper .al_author_gallery_item {
+    display: block;
+}
+
+#al_author_gallery_wrapper .al_author_gallery_image {
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    #al_author_gallery_wrapper {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #al_author_gallery_wrapper {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #al_author_gallery_wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #al_author_gallery_wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+/* Author Posts */
+
+#al_author_posts li a {
+    font-size: 16px;
+}
+
+
+
+/* Authors Archive */
+
 .post-type-archive-authors #al_authors_wrapper h1 {
     margin-bottom: 1em;
 }
 
 .post-type-archive-authors #al_authors_wrapper h2 {
     font-weight: 500;
+    padding: 0;
+    border: none;
 }
 
 ul#al_authors_archive_list {
@@ -89,3 +171,14 @@ ul#al_authors_archive_list {
     min-width: initial;
     width: 120px;
 }
+
+#al_authors_archive_list .al_author_social_link {
+    margin-right: 10px;
+}
+
+#al_authors_archive_list .al_author_profile_link {
+
+}
+
+
+

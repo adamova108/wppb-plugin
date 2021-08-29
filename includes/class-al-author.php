@@ -150,6 +150,10 @@ class Al_Author {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'create_authors_metabox' );
 		$this->loader->add_action( 'save_post_authors', $plugin_admin, 'authors_metabox_save' );
 		$this->loader->add_action( 'wp_ajax_al_author_link_user_ajax', $plugin_admin, 'al_author_link_user_ajax_callback' );
+		$this->loader->add_filter( 'manage_authors_posts_columns', $plugin_admin, 'author_admin_columns' );
+		$this->loader->add_filter( 'manage_authors_posts_custom_column', $plugin_admin, 'author_admin_columns_switch', 10, 2);
+		$this->loader->add_filter( 'manage_edit-authors_sortable_columns', $plugin_admin, 'author_admin_sortable_columns' );
+		$this->loader->add_action( 'pre_get_posts', $plugin_admin, 'authors_archive_query_override'); 
 	}	
 
 	/**
