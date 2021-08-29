@@ -70,7 +70,7 @@ class Al_Author_Common {
 			'show_ui' => true,
 			'query_var' => true,
 			'hierarchical' => false,
-			'supports' => array('thumbnail'),
+			'supports' => array('author_info_metabox'),
 			'rewrite' => array('slug' => 'authors'),
 			'has_archive' => 'authors',
 			'menu_icon' => 'dashicons-groups'

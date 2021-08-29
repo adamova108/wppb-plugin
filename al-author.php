@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1); // -*- coding: utf-8 -*-
 
 /**
  * The plugin bootstrap file

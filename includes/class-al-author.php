@@ -1,19 +1,6 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://github.com/adamova108
- * @since      1.0.0
- *
- * @package    Al_Author
- * @subpackage Al_Author/includes
- */
-
-/**
  * The core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
@@ -85,13 +72,6 @@ class Al_Author {
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - Al_Author_Loader. Orchestrates the hooks of the plugin.
-	 * - Al_Author_i18n. Defines internationalization functionality.
-	 * - Al_Author_Admin. Defines all hooks for the admin area.
-	 * - Al_Author_Public. Defines all hooks for the public side of the site.
-	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
@@ -124,9 +104,14 @@ class Al_Author {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-al-author-public.php';
 
 		/**
-		 * The class responsible for defining all actions that commonly occur.
+		 * The class responsible for defining all common actions.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-al-author-common.php';
+
+		/**
+		 * Include public functions (used on front-end)
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'functions/al_public_fn.php';
 
 		$this->loader = new Al_Author_Loader();
 
@@ -162,8 +147,10 @@ class Al_Author {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		
-	}
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'create_authors_metabox' );
+		$this->loader->add_action( 'save_post_authors', $plugin_admin, 'authors_metabox_save' );
+		$this->loader->add_action( 'wp_ajax_al_author_link_user_ajax', $plugin_admin, 'al_author_link_user_ajax_callback' );
+	}	
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality
@@ -178,7 +165,7 @@ class Al_Author {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_filter( 'template_include', $plugin_public, 'template_loader' );
 	}
 
 	/**
@@ -189,10 +176,9 @@ class Al_Author {
 	 */
 	private function define_common_hooks() {
 
-		$plugin_admin = new Al_Author_Common( $this->get_plugin_name(), $this->get_version() );
+		$plugin_common = new Al_Author_Common( $this->get_plugin_name(), $this->get_version() );
 	
-		$this->loader->add_action( 'init', $plugin_admin, 'register_authors_cpt' );
-
+		$this->loader->add_action( 'init', $plugin_common, 'register_authors_cpt' );
 	}
 
 	/**

@@ -2,3 +2,105 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+ #al_author_link_user {
+     min-width: 200px;
+ }
+
+ #al_author_gallery_current {
+    overflow: hidden;
+ }
+
+ .al-button {
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s opacity, .3s visibility, .3s right;
+ }
+
+.al_author_gallery_image_wrapper:hover .al-button {
+    right: 10px;
+    opacity: 1;
+    visibility: visible;
+}
+
+ .al-button.additional-image-remove {
+     top: 35px;
+ }
+
+ .al_author_gallery_image_wrapper.ui-sortable-placeholder {
+     border: 1px dashed #bbb;
+     background: #fafafa;
+     visibility: visible !important;
+ }
+ 
+ .al-button:active,
+ .al-button:focus {
+     outline: none;
+     border: none;
+     box-shadow: none;
+ }
+
+ .al-button::before {
+    opacity: .5;
+    width: 27px;
+    height: 27px;
+    line-height: 28px;
+    border: 2px solid #2271b1;
+    border-radius: 100%;
+ }
+
+ .al-button.additional-image-remove::before {
+     color: #c1001b;
+     border-color: #c1001b;
+ }
+ 
+ .al-button:hover::before {
+    opacity: 1;
+ }
+
+ .al_author_gallery_image_wrapper {
+    float: left;
+    padding-right: 45px;
+    position: relative;
+    margin: 0 20px 40px 0;
+}
+ 
+ .al_author_gallery_image {
+     display: inline-block;
+ }
+
+ .al_author_gallery_image img {
+    width: 135px;
+    cursor: grab;
+    border: 1px solid rgba(0,0,0,0);
+    box-sizing: border-box;
+    transition: .3s border-color;
+}
+
+.al_author_gallery_image_wrapper:hover img {
+    border-color: rgba(0,0,0,0.1);
+}
+
+.al_author_gallery_image_wrapper.ui-sortable-helper .al_author_gallery_image img {
+    cursor: grabbing;
+}
+
+ div.al_author_gallery_new {
+	margin: 10px 0 0 0;	
+}
+
+#al_author_gallery_current ul {
+	list-style: none;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#al_author_gallery_current ul li {
+	float: left;
+	margin: 0 10px 0 0;
+}

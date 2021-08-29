@@ -3,16 +3,6 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://github.com/adamova108
- * @since      1.0.0
- *
- * @package    Al_Author
- * @subpackage Al_Author/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
@@ -21,15 +11,6 @@
  * @author     Adam Luzsi <luzsiadam@gmail.com>
  */
 class Al_Author_Public {
-
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
@@ -61,18 +42,6 @@ class Al_Author_Public {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Al_Author_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Al_Author_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-public.css', array(), $this->version, 'all' );
 
 	}
@@ -84,20 +53,25 @@ class Al_Author_Public {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Al_Author_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Al_Author_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+
+	public function template_loader( $template ) {
+		
+		if (is_singular('authors')) {
+			
+			if (file_exists(get_stylesheet_directory().'/single-authors.php')) {
+				$template = get_stylesheet_directory().'/single-authors.php';
+			}
+			else if (file_exists(dirname( __FILE__, 2 ) . '/templates/single-authors.php')){
+				$template = dirname( __FILE__, 2 ) . '/templates/single-authors.php';
+			}
+
+		}
+    
+		return $template;
 	}
 
 }
