@@ -1,19 +1,6 @@
 <?php
 
 /**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       https://github.com/adamova108
- * @since      1.0.0
- *
- * @package    Al_Author
- * @subpackage Al_Author/includes
- */
-
-/**
  * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin

@@ -42,7 +42,7 @@ class Al_Author_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-public.css', array(), microtime(), 'all' );
 
 	}
 
@@ -67,6 +67,16 @@ class Al_Author_Public {
 			}
 			else if (file_exists(dirname( __FILE__, 2 ) . '/templates/single-authors.php')){
 				$template = dirname( __FILE__, 2 ) . '/templates/single-authors.php';
+			}
+
+		}
+		elseif (is_archive('authors')) {
+			
+			if (file_exists(get_stylesheet_directory().'/archive-authors.php')) {
+				$template = get_stylesheet_directory().'/archive-authors.php';
+			}
+			else if (file_exists(dirname( __FILE__, 2 ) . '/templates/archive-authors.php')){
+				$template = dirname( __FILE__, 2 ) . '/templates/archive-authors.php';
 			}
 
 		}

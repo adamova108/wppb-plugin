@@ -98,90 +98,90 @@
 
 		$( "#al_author_gallery_current" ).sortable({
 			handle: '.al_author_gallery_image img',
-		}).disableSelection();;
+		}).disableSelection();
     	
 
-		// Add Profile Picture
-		
-		$(document).on( 'click', '#al_author_profile_pic_add', function(e){
+		// Add Images
+
+		$(document).on( 'click', '#al_author_profile_pic_add, .additional-image-upload', function(e){
+			
 			e.preventDefault();
-			let $this = $(this),
-				custom_uploader = wp.media({
-				title: 'Browse',
-				library : {
-					type : 'image'
-				},
-				button: {
-					text: 'Set image as profile picture'
-				},
-				multiple: false
-			}).on('select', function() { // it also has "open" and "close" events
-				
-				let attachment = custom_uploader.state().get('selection').first().toJSON();
-				
-				$('#al_author_profile_pic_wrapper').prepend('<img src="' + attachment.url + '" width="150" class="al_author_profile_pic_thumbnail" />');
-				
-				$('#al_author_profile_pic').val(attachment.id);
 
-				$this.replaceWith('<p><input type="button" class="button-secondary button-large button" id="al_author_profile_pic_remove" name="al_author_profile_pic_remove" value="Remove Image" /></p>');
+			if ($(this).attr('id') === 'al_author_profile_pic_add') {
+				
+				let $this = $(this),
+					custom_uploader = wp.media({
+					title: 'Browse',
+					library : {
+						type : 'image'
+					},
+					button: {
+						text: 'Set image as profile picture'
+					},
+					multiple: false
+				}).on('select', function() { 
+					
+					let attachment = custom_uploader.state().get('selection').first().toJSON();
+					
+					$('#al_author_profile_pic_wrapper').prepend('<img src="' + attachment.url + '" width="150" class="al_author_profile_pic_thumbnail" />');
+					
+					$('#al_author_profile_pic').val(attachment.id);
 
-			}).open();
+					$this.replaceWith('<p><input type="button" class="button-secondary button-large button" id="al_author_profile_pic_remove" name="al_author_profile_pic_remove" value="Remove Image" /></p>');
+
+				}).open();
+			}
+			else {
+
+				let additionalImageId = $(this).data('additional-id'),
+					custom_uploader = wp.media({
+					title: 'Browse',
+					library : {
+						type : 'image'
+					},
+					button: {
+						text: 'Add image to Gallery' 
+					},
+					multiple: false
+				}).on('select', function() { 
+					
+					let attachment = custom_uploader.state().get('selection').first().toJSON();
+					
+					$('#additionalImageThumb' + additionalImageId).html('<img src="' + attachment.url + '" width="150" class="al_author_gallery_image" />');
+					
+					$('#additional_image_id_'+additionalImageId).val(attachment.id);
+
+				}).open();
+			}
 		});
 		
 
 		// Remove Profile Picture
 
-		$(document).on('click', '#al_author_profile_pic_remove', function(e){
+		$(document).on('click', '#al_author_profile_pic_remove, .additional-image-remove', function(e){
+			
 			e.preventDefault();
 			
 			if (!confirm('Are you sure you want to remove the profile picture?')) {
 				return false;
 			}
 
-			$('#al_author_profile_pic').val(''); 
-			$('.al_author_profile_pic_thumbnail').remove();
+			if ($(this).attr('id') === 'al_author_profile_pic_remove') {
 
-			$(this).replaceWith('<p><input type="button" class="button-primary button-large button" id="al_author_profile_pic_add" name="al_author_profile_pic_add" value="Add Image" /></p>');
-		});
+				$('#al_author_profile_pic').val(''); 
+				$('.al_author_profile_pic_thumbnail').remove();
 
-
-		// Add Gallery Images
-
-		$(document).on( 'click', '.additional-image-upload', function(e){
-			e.preventDefault();
-			var additionalImageId = $(this).data('additional-id');
-			var custom_uploader = wp.media({
-				title: 'Browse',
-				library : {
-					type : 'image'
-				},
-				button: {
-					text: 'Add image to Galley' // button label text
-				},
-				multiple: false
-			}).on('select', function() { // it also has "open" and "close" events
-				var attachment = custom_uploader.state().get('selection').first().toJSON();
-				$('#additionalImageThumb' + additionalImageId).html('<img src="' + attachment.url + '" width="150" class="al_author_gallery_image" />');
-				$('#additional_image_id_'+additionalImageId).val(attachment.id);
-			}).open();
-		});
-	
-
-		// Remove Gallery Images
-
-		$(document).on('click', '.additional-image-remove', function(e){
-			e.preventDefault();
-			if (!confirm('Are you sure you want to remove this image?')) {
-				return false;
+				$(this).replaceWith('<p><input type="button" class="button-primary button-large button" id="al_author_profile_pic_add" name="al_author_profile_pic_add" value="Add Image" /></p>');
 			}
-			var additionalImageId = $(this).data('additional-id');
-			$('#additional_image_id_'+additionalImageId).val(''); // emptying the hidden field
-			$('#additionalImageThumb' + additionalImageId).html('');
-			$('#al_author_gallery_new'+additionalImageId).remove();
+			else {
+
+				var additionalImageId = $(this).data('additional-id');
+				$('#additional_image_id_'+additionalImageId).val(''); 
+				$('#additionalImageThumb' + additionalImageId).html('');
+				$('#al_author_gallery_new'+additionalImageId).remove();
+			}
 		});
-
-
-		
+			
 	});
 
 })( jQuery );

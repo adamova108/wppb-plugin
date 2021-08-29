@@ -2,3 +2,90 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ #al_authors_wrapper {
+     max-width: 1280px;
+     margin: 0 auto;
+     padding: 1em 0;
+ }
+
+ #al_authors_wrapper h1 {
+    margin: .5em 0;
+    font-size: 3em;
+    font-weight: bold;
+    border-bottom: 1px solid #dedede;
+ }
+
+ #al_authors_wrapper h2 {
+    margin: 0 0 .5em;
+    font-size: 2em;
+    font-weight: bold;
+ }
+
+ #al_authors_wrapper p {
+     font-size: 1em;
+     margin: 0 0 1em;
+ }
+
+ .al_author_profile_pic {
+     float: left;
+     margin: 0 2em 2em 0;
+     max-width: 400px;
+     min-width: 200px;
+     width: 40%;
+ }
+ 
+ #al_author_bio {
+     overflow: hidden;
+ }
+
+ #al_authors_wrapper blockquote {
+    background: #e6f3ff;
+    padding: 1em;
+    font-style: italic;
+    margin: 1em 0;
+    border-left: 5px solid #2ea3f2;
+}
+
+ #al_authors_wrapper blockquote p {
+     margin: 0;
+ }
+
+ #al_authors_wrapper ul {
+    list-style: disc outside;
+    margin: 1em 0;
+    padding: 0 0 0 2em;
+}
+
+#al_authors_wrapper ol {
+    list-style: alpha outside;
+    margin: 1em 0;
+    padding: 0 0 0 2em;
+}
+
+.post-type-archive-authors #al_authors_wrapper h1 {
+    margin-bottom: 1em;
+}
+
+.post-type-archive-authors #al_authors_wrapper h2 {
+    font-weight: 500;
+}
+
+ul#al_authors_archive_list {
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
+}
+
+#al_authors_archive_list li {
+    margin: 0 0 1em;
+    padding: 0 0 1em;
+    /* border-bottom: 1px solid #fafafa; */
+    overflow: hidden;
+}
+
+
+#al_authors_archive_list .al_author_profile_pic {
+    min-width: initial;
+    width: 120px;
+}

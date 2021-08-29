@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://github.com/adamova108
- * @since      1.0.0
- *
- * @package    Al_Author
- * @subpackage Al_Author/includes
- */
-
 /**
  * Register all actions and filters for the plugin.
  *
@@ -22,15 +11,6 @@
  * @author     Adam Luzsi <luzsiadam@gmail.com>
  */
 class Al_Author_Loader {
-
-	/**
-	 * The array of actions registered with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
-	 */
-	protected $actions;
 
 	/**
 	 * The array of filters registered with WordPress.

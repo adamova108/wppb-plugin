@@ -1,16 +1,6 @@
 <?php
 
 /**
- * Fired during plugin deactivation
- *
- * @link       https://github.com/adamova108
- * @since      1.0.0
- *
- * @package    Al_Author
- * @subpackage Al_Author/includes
- */
-
-/**
  * Fired during plugin deactivation.
  *
  * This class defines all code necessary to run during the plugin's deactivation.
