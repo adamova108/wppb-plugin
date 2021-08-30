@@ -324,10 +324,14 @@ class Al_Author_Admin {
 
 
 	 public function author_admin_columns($columns) {
-		
+		$columns_clone = $columns;
+		$columns = [];
+		$columns['cb'] = $columns_clone['cb'];
+		$columns['title'] = $columns_clone['title'];
 		$columns['profile_pic'] = __( 'Profile Picture', $this->plugin_name );
 		$columns['first_name'] = __( 'First Name', $this->plugin_name );
 		$columns['last_name'] = __( 'Last Name', $this->plugin_name );
+		$columns['date'] = $columns_clone['date'];
   		return $columns;
 
 	}

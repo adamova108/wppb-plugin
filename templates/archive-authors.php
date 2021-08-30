@@ -14,11 +14,16 @@ while ( have_posts() ) :
     
     echo '<li>';
 
-    al_the_author_image(); 
+    al_the_author_image();
+    
+    echo '<div style="overflow:hidden">';
+    
     al_the_author_title();
     al_the_author_bio_excerpt();
     al_the_author_social();
     al_the_author_profile_link();
+    
+    echo '</div>';
     
     echo '</li>';
 
