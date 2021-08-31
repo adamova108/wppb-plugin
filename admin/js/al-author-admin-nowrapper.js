@@ -13,7 +13,7 @@ function al_add_new_image() {
 	imageHtml += '<input type="hidden" name="al_author_gallery[]" id="additional_image_id_'+additionalImages+'" value=""/>';
 	imageHtml += '<a href="#" title="Change image" class="additional-image-upload al-button dashicons-edit-large dashicons-before" data-additional-id="'+additionalImages+'"></a>';
 	imageHtml += '<a href="#" title="Remove image" class="additional-image-remove al-button dashicons-no dashicons-before" data-additional-id="'+additionalImages+'"></a>';
-	imageHtml += '</div><br/>';
+	imageHtml += '</div>';
 
 	jQuery('#al_author_gallery_current').append(imageHtml);
 	jQuery('#al_author_gallery_current' + jQuery('#al_author_gallery_current .al_author_gallery_image_wrapper').length).fadeIn();
