@@ -31,6 +31,7 @@ class Al_Author_Activator {
 	 */
 	public static function activate() {
 
+		// Flush the rewrite rules upon activation
 		flush_rewrite_rules(true);
 
 	}

@@ -78,7 +78,10 @@
 	
 
 
-		// Handle media select, upload and sorting
+		/** 
+		 * Handle media select, upload and sorting 
+		 * */
+
 
 		$( "#al_author_gallery_current" ).sortable({
 			handle: '.al_author_gallery_image img',
@@ -140,7 +143,7 @@
 		});
 		
 
-		// Remove Profile Picture
+		// Remove images
 
 		$(document).on('click', '#al_author_profile_pic_remove, .additional-image-remove', function(e){
 			

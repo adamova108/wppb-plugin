@@ -21,6 +21,8 @@ class Al_Author_Deactivator {
 	 */
 	public static function deactivate() {
 
+		// Not much need to be done here at the moment
+
 	}
 
 }
