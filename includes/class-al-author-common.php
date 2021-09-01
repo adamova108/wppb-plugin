@@ -33,25 +33,25 @@ class Al_Author_Common {
 
 	/**
 	 * Register the Auhtors CPT
-	 * 
+	 *
 	 * @since    1.0.0
 	 */
 	public function register_authors_cpt() {
 
 		$labels = array(
-			'name' => _x('Authors', 'post type general name'),
-			'singular_name' => _x('Author', 'post type singular name'),
-			'add_new' => _x('Add New', 'person'),
-			'add_new_item' => __('Add New Author'),
-			'edit_item' => __('Edit Author'),
-			'new_item' => __('New Author'),
-			'all_items' => __('All Authors'),
-			'view_item' => __('View Author'),
-			'search_items' => __('Search Authors'),
-			'not_found' =>  __('No author found'),
-			'not_found_in_trash' => __('No auhtor found in Trash'), 
+			'name' => _x( 'Authors', 'post type general name' ),
+			'singular_name' => _x( 'Author', 'post type singular name' ),
+			'add_new' => _x( 'Add New', 'person' ),
+			'add_new_item' => __( 'Add New Author' ),
+			'edit_item' => __( 'Edit Author' ),
+			'new_item' => __( 'New Author' ),
+			'all_items' => __( 'All Authors' ),
+			'view_item' => __( 'View Author' ),
+			'search_items' => __( 'Search Authors' ),
+			'not_found' => __( 'No author found' ),
+			'not_found_in_trash' => __( 'No auhtor found in Trash' ),
 			'parent_item_colon' => '',
-			'menu_name' => 'Authors'
+			'menu_name' => 'Authors',
 		);
 		$args = array(
 			'labels' => $labels,
@@ -61,12 +61,12 @@ class Al_Author_Common {
 			'show_ui' => true,
 			'query_var' => true,
 			'hierarchical' => false,
-			'supports' => array('author_info_metabox'),
-			'rewrite' => array('slug' => 'authors'),
+			'supports' => array( 'author_info_metabox' ),
+			'rewrite' => array( 'slug' => 'authors' ),
 			'has_archive' => 'authors',
-			'menu_icon' => 'dashicons-groups'
+			'menu_icon' => 'dashicons-groups',
 		);
-		register_post_type('authors',$args);
+		register_post_type( 'authors', $args );
 	}
-	
+
 }

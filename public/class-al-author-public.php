@@ -25,8 +25,8 @@ class Al_Author_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param    string $plugin_name The name of the plugin.
+	 * @param    string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -44,7 +44,7 @@ class Al_Author_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/al-author-public.css', array(), microtime(), 'all' );
 
-		wp_enqueue_style( $this->plugin_name.'-fancybox', plugin_dir_url( __FILE__ ) . 'css/jquery.fancybox.min.css', array(), microtime(), 'all' );
+		wp_enqueue_style( $this->plugin_name . '-fancybox', plugin_dir_url( __FILE__ ) . 'css/jquery.fancybox.min.css', array(), microtime(), 'all' );
 
 	}
 
@@ -57,34 +57,29 @@ class Al_Author_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-public.js', array( 'jquery' ), microtime(), false );
 
-		wp_enqueue_script( $this->plugin_name.'-fancybox', plugin_dir_url( __FILE__ ) . 'js/jquery.fancybox.min.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-fancybox', plugin_dir_url( __FILE__ ) . 'js/jquery.fancybox.min.js', array( 'jquery' ), $this->version, false );
 
 	}
 
 
 	public function template_loader( $template ) {
-		
-		if (is_singular('authors')) {
-			
-			if (file_exists(get_stylesheet_directory().'/single-authors.php')) {
-				$template = get_stylesheet_directory().'/single-authors.php';
-			}
-			else if (file_exists(dirname( __FILE__, 2 ) . '/templates/single-authors.php')){
+
+		if ( is_singular( 'authors' ) ) {
+
+			if ( file_exists( get_stylesheet_directory() . '/single-authors.php' ) ) {
+				$template = get_stylesheet_directory() . '/single-authors.php';
+			} else if ( file_exists( dirname( __FILE__, 2 ) . '/templates/single-authors.php' ) ) {
 				$template = dirname( __FILE__, 2 ) . '/templates/single-authors.php';
 			}
+		} elseif ( is_archive( 'authors' ) ) {
 
-		}
-		elseif (is_archive('authors')) {
-			
-			if (file_exists(get_stylesheet_directory().'/archive-authors.php')) {
-				$template = get_stylesheet_directory().'/archive-authors.php';
-			}
-			else if (file_exists(dirname( __FILE__, 2 ) . '/templates/archive-authors.php')){
+			if ( file_exists( get_stylesheet_directory() . '/archive-authors.php' ) ) {
+				$template = get_stylesheet_directory() . '/archive-authors.php';
+			} else if ( file_exists( dirname( __FILE__, 2 ) . '/templates/archive-authors.php' ) ) {
 				$template = dirname( __FILE__, 2 ) . '/templates/archive-authors.php';
 			}
-
 		}
-    
+
 		return $template;
 	}
 
