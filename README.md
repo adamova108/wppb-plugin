@@ -2,6 +2,7 @@
 
 A simple plugin for demo purposes.
 
+
 ## 🏁 Usage
 
 - Clone inside */wp-content/plugins* folder or download ZIP and install as a plugin in WordPress admin
