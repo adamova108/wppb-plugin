@@ -74,26 +74,23 @@ class Al_Author_Admin {
 		global $current_screen;
 
 		/**
-		 * Add the Select2 JavaScript file - IF - we are editing an Author CPT post
+		 * Add the admin scripts ONLY if we are on the EDIT-AUTHORS page
 		 */
 
-		if ( 'edit-authors' === $current_screen->id ) {
+		 if ( 'authors' === $current_screen->id ) {
+			
 			wp_enqueue_script( 'select2-js', plugin_dir_url( __FILE__ ) . 'js/select2.min.js', 'jquery', '4.0.13' );
+			
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-admin.js', array( 'jquery' ), microtime(), false );
+	
+			wp_enqueue_script( 'jquery-ui-core' );
+			wp_enqueue_script( 'jquery-ui-sortable' );
+
+			wp_enqueue_media();
 		}
 
-		/**
-		 * Enqueue the general admin JS | instead of the plugin version I use microtime() to prevent browser caching
-		 */
-		wp_enqueue_script( $this->plugin_name . '-nowrapper', plugin_dir_url( __FILE__ ) . 'js/al-author-admin-nowrapper.js', array( 'jquery' ), microtime(), false );
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/al-author-admin.js', array( 'jquery' ), microtime(), false );
-
-		wp_enqueue_media();
-
-		wp_enqueue_script( 'jquery-ui-core' );
-
-		wp_enqueue_script( 'jquery-ui-sortable' );
 	}
+
 
 	public function create_authors_metabox() {
 
